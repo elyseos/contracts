@@ -74,19 +74,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "tokenAddress",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -104,7 +91,7 @@
 			"kind": "dev",
 			"methods": {
 				"constructor": {
-					"details": "Sets the values for {initialMintAddress}."
+					"details": "Sets the values for {token} - ElysToken. The Elystoken then needs ownership transferred to this contract to allow for minting"
 				},
 				"mint(bool,address)": {
 					"details": "Mint and vote function rolled into one so when the vote is true, it automatically mints.  If false - it sets things up to vote again in 3 * 4 weeks. This will be called by the DAO which will ultimately be the owner of this contract."
@@ -114,9 +101,6 @@
 				},
 				"renounceOwnership()": {
 					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
-				},
-				"tokenAddress()": {
-					"details": "Returns the Elys token address"
 				},
 				"transferOwnership(address)": {
 					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
@@ -195,11 +179,11 @@
 			]
 		},
 		"elysios/ElysMint.sol": {
-			"keccak256": "0xb96a086b660e892221b4a1c45637ad80a437961f254eaac75e2850ef11ad8ddb",
+			"keccak256": "0x6ab458bb788d92b2220485b08e25479512dd6151ff44e3ab05ec316cd19f0035",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://720697b9b51869b6f168d7a4434af7f1fef22ad4c1d75d4af91175d0712900ea",
-				"dweb:/ipfs/QmWnT7NzJBaYopaQtw6xH4AJAVv8LiD8iSFGTvSa4B4E9L"
+				"bzz-raw://7e49d520663785022f72932cb69d717c787a933aca71161a582db462e58875b1",
+				"dweb:/ipfs/QmNjzPJj4Gn85yLc6zQ3zQvreRyRa329v9kCkPQQXTmKan"
 			]
 		}
 	},

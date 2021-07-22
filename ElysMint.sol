@@ -23,8 +23,8 @@ contract ElysMint is Ownable {
     uint256 private _currentEpochStart = 0;
     uint256 private _numVotes = 0; //num votes in this epoch - also keeps track of number of 4 weeks cycles passed since last vote
 
-    uint8 private _decimals = 4;
-    address private _tokenAddress; //Elys token address that gets created in constructor
+    uint8 private immutable _decimals;
+    ElysToken private immutable _token; //Elys token address that gets created in constructor
     
     
     /**
@@ -33,16 +33,16 @@ contract ElysMint is Ownable {
      */
     constructor(address token){
         _currentEpochStart = block.timestamp;
-        _tokenAddress = token;
-        ElysToken _token = ElysToken(_tokenAddress);
-        _decimals = _token.decimals();
+        ElysToken elys = ElysToken(token);
+        _token = elys;
+        _decimals = elys.decimals();
     }
     
      /**
      * @dev Returns amount to multiply values by so that decimals are included
      *
      */
-    function _dec() private pure returns(uint256){
+    function _dec() private view returns(uint256){
         return 10**_decimals;
     }
     
@@ -64,7 +64,6 @@ contract ElysMint is Ownable {
         /*
             After voting cycle (9 epochs) minting abount is 3% of total supply
         */
-        ElysToken _token = ElysToken(_tokenAddress);
         uint256 totalSupply = _token.totalSupply();
         
         return  (3 * totalSupply/100)/_dec();
@@ -88,7 +87,7 @@ contract ElysMint is Ownable {
     * This will be called by the DAO which will ultimately be the owner of this contract.
     *
     */
-    function mint(bool votesuccess, address to) public onlyOwner{
+    function mint(bool votesuccess, address to) external onlyOwner{
         
         if(_currentEpoch<9){
             if(!votesuccess){
@@ -109,7 +108,6 @@ contract ElysMint is Ownable {
         uint256 mintAmount = _mintAmount()*_dec();
         _currentEpoch ++;
         _currentEpochStart = block.timestamp;
-        ElysToken _token = ElysToken(_tokenAddress);
         _token.mint(to, mintAmount);
     }
     
