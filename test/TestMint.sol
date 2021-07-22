@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-import "./Elys.sol";
+import "../Elys.sol";
 
 contract Test is Ownable {
     uint256 constant private _initialSupply = 35000000; //35 000 000
@@ -21,15 +21,6 @@ contract Test is Ownable {
     
     uint256 _blocktime = 0;
     
-    /*
-    constructor(address initialMintAddress) {
-        _blocktime = block.timestamp;
-        _currentEpochStart = _blocktime;
-        _voteIntervalLength = 3 * 4 weeks;
-         ElysToken _token = new ElysToken(initialMintAddress,_initialSupply*_dec(),_decimals);
-        _tokenAddress = address(_token);
-    }
-    */
     
     constructor(address token){
         _blocktime = block.timestamp;
@@ -86,22 +77,22 @@ contract Test is Ownable {
     }
     
     function mint(bool votesuccess, address to) public onlyOwner{
-        //if(_currentEpoch>0){
-            if(_currentEpoch<9){
-                if(!votesuccess){
-                    if(_currentEpochStart + _epochMax>_blocktime){
-                        require(_timePassed());
-                        _numVotes++;
-                        return;
-                    }
-                } else {
+  
+        if(_currentEpoch<9){
+            if(!votesuccess){
+                if(_currentEpochStart + _epochMax>_blocktime){
                     require(_timePassed());
+                    _numVotes++;
+                    return;
                 }
+            } else {
+                require(_timePassed());
             }
-            else{
-                 require(_currentEpochStart + 9*(4 weeks)<_blocktime);
-            }
-        //}
+        }
+        else{
+             require(_currentEpochStart + 9*(4 weeks)<_blocktime);
+        }
+    
         if(_numVotes>0)_numVotes = 0;
         uint256 mintAmount = _mintAmount()*_dec();
         _currentEpoch ++;
@@ -110,8 +101,6 @@ contract Test is Ownable {
         _token.mint(to, mintAmount);
     }
     
-    function tokenAddress() public view returns (address){
-        return _tokenAddress;
-    }
+   
     
 }
