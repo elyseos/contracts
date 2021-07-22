@@ -42,7 +42,7 @@ contract ElysMint is Ownable {
      * @dev Returns amount to multiply values by so that decimals are included
      *
      */
-    function _dec() private pure returns(uint256){
+    function _dec() private view returns(uint256){
         return 10**_decimals;
     }
     
@@ -88,7 +88,7 @@ contract ElysMint is Ownable {
     * This will be called by the DAO which will ultimately be the owner of this contract.
     *
     */
-    function mint(bool votesuccess, address to) public onlyOwner{
+    function mint(bool votesuccess, address to) external onlyOwner{
         
         if(_currentEpoch<9){
             if(!votesuccess){
