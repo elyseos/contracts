@@ -28,16 +28,9 @@ contract ElysMint is Ownable {
     
     
     /**
-     * @dev Sets the values for {initialMintAddress}.
-     *
+     * @dev Sets the values for {token} - ElysToken.
+     * The Elystoken then needs ownership transferred to this contract to allow for minting
      */
-     /*
-    constructor(address initialMintAddress) {
-        _currentEpochStart = block.timestamp;
-         ElysToken _token = new ElysToken(initialMintAddress, _initialSupply*_dec(),_decimals);
-        _tokenAddress = address(_token);
-    }
-    */
     constructor(address token){
         _currentEpochStart = block.timestamp;
         _tokenAddress = token;
@@ -120,11 +113,5 @@ contract ElysMint is Ownable {
         _token.mint(to, mintAmount);
     }
     
-    /**
-    * @dev Returns the Elys token address
-    */
-    function tokenAddress() public view returns (address){
-        return _tokenAddress;
-    }
-    
 }
+
