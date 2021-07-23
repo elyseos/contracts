@@ -23,8 +23,8 @@ contract ElysMint is Ownable {
     uint256 private _currentEpochStart = 0;
     uint256 private _numVotes = 0; //num votes in this epoch - also keeps track of number of 4 weeks cycles passed since last vote
 
-    uint8 private _decimals = 4;
-    address private _tokenAddress; //Elys token address that gets created in constructor
+    uint8 private immutable _decimals;
+    ElysToken private immutable _token; //Elys token address that gets created in constructor
     
     
     /**
@@ -33,9 +33,9 @@ contract ElysMint is Ownable {
      */
     constructor(address token){
         _currentEpochStart = block.timestamp;
-        _tokenAddress = token;
-        ElysToken _token = ElysToken(_tokenAddress);
-        _decimals = _token.decimals();
+        ElysToken elys = ElysToken(token);
+        _token = elys;
+        _decimals = elys.decimals();
     }
     
      /**
@@ -64,7 +64,6 @@ contract ElysMint is Ownable {
         /*
             After voting cycle (9 epochs) minting abount is 3% of total supply
         */
-        ElysToken _token = ElysToken(_tokenAddress);
         uint256 totalSupply = _token.totalSupply();
         
         return  (3 * totalSupply/100)/_dec();
@@ -109,7 +108,6 @@ contract ElysMint is Ownable {
         uint256 mintAmount = _mintAmount()*_dec();
         _currentEpoch ++;
         _currentEpochStart = block.timestamp;
-        ElysToken _token = ElysToken(_tokenAddress);
         _token.mint(to, mintAmount);
     }
     

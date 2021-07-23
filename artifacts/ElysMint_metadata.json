@@ -179,11 +179,11 @@
 			]
 		},
 		"elysios/ElysMint.sol": {
-			"keccak256": "0xcd50bf5e67f88aa15d8d61573e9cef7f613c00291296ca01a45f47709ca3269f",
+			"keccak256": "0x6ab458bb788d92b2220485b08e25479512dd6151ff44e3ab05ec316cd19f0035",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://56736dae63bc0d32fd061cae9418381ae39c02a0253295a2df760eea42c252cd",
-				"dweb:/ipfs/QmaNFbTPZDdgXXxMuqwUPEt2BjQJnfrUYDejVGTdvsiBsJ"
+				"bzz-raw://7e49d520663785022f72932cb69d717c787a933aca71161a582db462e58875b1",
+				"dweb:/ipfs/QmNjzPJj4Gn85yLc6zQ3zQvreRyRa329v9kCkPQQXTmKan"
 			]
 		}
 	},
