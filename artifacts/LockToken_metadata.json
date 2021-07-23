@@ -23,6 +23,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "amountCanRelease",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "beneficiary",
 				"outputs": [
 					{
@@ -36,33 +49,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "daysPassedSinceLastDraw",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "daysPassedSinceStart",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "draw",
+				"name": "release",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -84,6 +71,11 @@
 		"devdoc": {
 			"kind": "dev",
 			"methods": {
+				"amountCanRelease()": {
+					"returns": {
+						"_0": "the amount that can be released to the beneficiary at this time"
+					}
+				},
 				"beneficiary()": {
 					"returns": {
 						"_0": "the beneficiary of the tokens."
@@ -144,11 +136,11 @@
 			]
 		},
 		"elysios/Lock.sol": {
-			"keccak256": "0x9905aed190cb029e9451d88e7ad54b1c51862dcafe22f009ab7c29b2298de5c0",
+			"keccak256": "0x7c31ed327e46fd65ebfb889a1281ad94db569efb4bbebe286e1afd68895a352b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://88701a6f990ec1f00bebb7584b396c46aa61dd8ccb3f042f7cdb00492f4fc63d",
-				"dweb:/ipfs/QmafQMuhoMaQi4XWj2J5Vh8TGqBMYrgD9RjdCMCTiYNdFa"
+				"bzz-raw://43d139820d474d6febe0ad60974853c4324567f1c05672ceba6461fc61d1fa24",
+				"dweb:/ipfs/QmVHV2bJDGfrKjqJHzgoojbJ6Z6simLvEa2pN3HY81bUoh"
 			]
 		}
 	},
