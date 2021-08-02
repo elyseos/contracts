@@ -111,23 +111,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-			"keccak256": "0x027b891937d20ccf213fdb9c31531574256de774bda99d3a70ecef6e1913ed2a",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://087318b21c528119f649899f5b5580566dd8d7b0303d4904bd0e8580c3545f14",
-				"dweb:/ipfs/Qmbn5Mj7aUn8hJuQ8VrQjjEXRsXyJKykgnjR9p4C3nfLtL"
-			]
-		},
-		"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
-			"keccak256": "0x02348b2e4b9f3200c7e3907c5c2661643a6d8520e9f79939fbb9b4005a54894d",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://d41d627f4ef9c6006df8c2d01227d3cf4a6c3359b5704c629d88933272eecadd",
-				"dweb:/ipfs/QmYDo7MvMsvuDxuJZ9RC9zFganS3Tm8RYzSmBP5qSmJfuY"
-			]
-		},
-		"@openzeppelin/contracts/utils/Address.sol": {
+		"elysios/Address.sol": {
 			"keccak256": "0x3b4820cac4f127869f6eb496c1d74fa6ac86ed24071e0f94742e6aef20e7252c",
 			"license": "MIT",
 			"urls": [
@@ -135,12 +119,28 @@
 				"dweb:/ipfs/QmWQJh5MsXJZjSTzAs9n5gtrqWYgXwkBa6xfwD5KKGQgSC"
 			]
 		},
-		"elysios/Lock.sol": {
-			"keccak256": "0x7c31ed327e46fd65ebfb889a1281ad94db569efb4bbebe286e1afd68895a352b",
+		"elysios/IERC20.sol": {
+			"keccak256": "0x027b891937d20ccf213fdb9c31531574256de774bda99d3a70ecef6e1913ed2a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://43d139820d474d6febe0ad60974853c4324567f1c05672ceba6461fc61d1fa24",
-				"dweb:/ipfs/QmVHV2bJDGfrKjqJHzgoojbJ6Z6simLvEa2pN3HY81bUoh"
+				"bzz-raw://087318b21c528119f649899f5b5580566dd8d7b0303d4904bd0e8580c3545f14",
+				"dweb:/ipfs/Qmbn5Mj7aUn8hJuQ8VrQjjEXRsXyJKykgnjR9p4C3nfLtL"
+			]
+		},
+		"elysios/Lock.sol": {
+			"keccak256": "0x2cdb313e1f0e4b61a012972e405478d5cccd1995ab8d2637d202c6965fc27cca",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://de174ffec70a317f9e52c4e611c10fe012bd7b22f94a9e9bccdc1faaa0512a51",
+				"dweb:/ipfs/QmUehMHjMwAGQAt7C5FiyGZjrA1S1yjXoq67zH28gd563K"
+			]
+		},
+		"elysios/SafeERC20.sol": {
+			"keccak256": "0x5a84941e8ac9bf14e8645a519242a62af5da41357582141ca80f55fb04d49ea8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://858f1e84883304ef309ef6efe8119b68b7fe252e63580b36f365f90bef7772b5",
+				"dweb:/ipfs/QmWx9K9GcsvdjusZgAPR5SwcPSc8robSpPGcApDRsTzeEi"
 			]
 		}
 	},
