@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "../Ownable.sol";
 
 import "../Elys.sol";
 
 contract Test is Ownable {
-    uint256 constant private _initialSupply = 35000000; //35 000 000
     uint256 constant private _initialEpochSupply = 90000000; //90 000 000
     uint256 constant private _epochDecr = 10000000; //amount to decrease the mint amount by every epoch
     uint256 constant private _epochMin = 24 weeks; //6 28 day cycles

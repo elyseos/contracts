@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-
+import "./Ownable.sol";
 import "./Elys.sol";
 
 contract ElysMint is Ownable {
@@ -11,7 +10,6 @@ contract ElysMint is Ownable {
         Keeping the following amounts at their value without the extra decimals. 
         Decimals get added with _dec function
     */
-    uint256 constant private _initialSupply = 350000000; 
     uint256 constant private _initialEpochSupply = 90000000; //Starts with this and then decreases depending on epoch
     uint256 constant private _epochDecr = 10000000; //amount to decrease the mint amount by every epoch (with the exception of epoch 8)
     
