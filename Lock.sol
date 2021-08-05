@@ -17,15 +17,17 @@ contract LockToken{
     //records amount already released
     uint256 private _released;
 
+    
 
     // beneficiary of tokens after they are released
     address private immutable _beneficiary;
     
-    constructor(IERC20 token_, address beneficiary_) {
+    constructor(IERC20 token_, address beneficiary_, uint256 numReleaseDays_) {
         _token = token_;
         _beneficiary = beneficiary_;
         _start = block.timestamp;
-        _numReleaseDays = 100;
+        _numReleaseDays = numReleaseDays_;
+        
         
     }
     
@@ -41,6 +43,20 @@ contract LockToken{
      */
     function token() public view returns (IERC20) {
         return _token;
+    }
+    
+    /**
+     * @return number of tokens still locked up
+     */
+    function locked() public view returns(uint256){
+        return token().balanceOf(address(this)) - amountCanRelease();
+    }
+    
+    /**
+     * @return the tokens that have been released already
+     */
+    function released() public view returns(uint256){
+        return _released;
     }
     
     /**
