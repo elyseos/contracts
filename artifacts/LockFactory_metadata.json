@@ -8,9 +8,14 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "token",
+						"internalType": "contract IERC20",
+						"name": "token_",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "numReleaseDays_",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -36,48 +41,19 @@
 				"type": "event"
 			},
 			{
-				"inputs": [],
-				"name": "_dec",
-				"outputs": [
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "address_",
+						"type": "address"
+					},
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "numTokens",
 						"type": "uint256"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "currentEpoch",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "inc3",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "inc6",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "inc9",
+				"name": "addLock",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -85,29 +61,17 @@
 			{
 				"inputs": [
 					{
-						"internalType": "bool",
-						"name": "votesuccess",
-						"type": "bool"
-					},
-					{
 						"internalType": "address",
-						"name": "to",
+						"name": "address_",
 						"type": "address"
 					}
 				],
-				"name": "mint",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "numVotes",
+				"name": "getLock",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "contract LockToken",
 						"name": "",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -150,6 +114,11 @@
 		"devdoc": {
 			"kind": "dev",
 			"methods": {
+				"getLock(address)": {
+					"returns": {
+						"_0": "the lock contract for a given benificiary"
+					}
+				},
 				"owner()": {
 					"details": "Returns the address of the current owner."
 				},
@@ -164,13 +133,17 @@
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {},
+			"methods": {
+				"addLock(address,uint256)": {
+					"notice": "create a new lock contract with address_ as the benificiary"
+				}
+			},
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"elysios/test/TestMint.sol": "Test"
+			"elysios/LockFactory.sol": "LockFactory"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -184,28 +157,20 @@
 		"remappings": []
 	},
 	"sources": {
+		"elysios/Address.sol": {
+			"keccak256": "0x3b4820cac4f127869f6eb496c1d74fa6ac86ed24071e0f94742e6aef20e7252c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://23e1c7303c30a2ef9c9b3f861cda15c78e4c9697b4a7988f2bf7b21c392a02fb",
+				"dweb:/ipfs/QmWQJh5MsXJZjSTzAs9n5gtrqWYgXwkBa6xfwD5KKGQgSC"
+			]
+		},
 		"elysios/Context.sol": {
 			"keccak256": "0x95098bd1d9c8dec4d80d3dedb88a0d949fa0d740ee99f2aa466bc308216ca6d5",
 			"license": "MIT",
 			"urls": [
 				"bzz-raw://7fec968dcd68e13961521fa3c7dd87baecad91a2653b19240e81f21cc4f3ba85",
 				"dweb:/ipfs/QmaXtsYt4Mphm8XHNUfk2me1cF3ssS2SqDBNFpYAzMjomC"
-			]
-		},
-		"elysios/ERC20.sol": {
-			"keccak256": "0x1e304f23b8006a1deb1162317ee416d6d0008186057d990a5d202420ead5152d",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://04057c96259288b67dd86f1b22825c5651eca1a45aa4e1e61d250e40555634f8",
-				"dweb:/ipfs/QmRBX7eaoBNXRnKbnJTGEPkvwazTG1BG54pCb5iTy3LqaK"
-			]
-		},
-		"elysios/Elys.sol": {
-			"keccak256": "0xc12563bdbaeee9340e7e0168c618f3b59bc474ed94f5b43c9db9e7518a9ce441",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://0033ba7fe7dacde37ca7b4188bcb1c4552b6907404ca8450c4ea4a8d4b422204",
-				"dweb:/ipfs/QmQTZjDmA4q7zr23E4CoiFG9WJoJPCbB5fYLhyr2S4r2Ra"
 			]
 		},
 		"elysios/IERC20.sol": {
@@ -216,12 +181,20 @@
 				"dweb:/ipfs/Qmbn5Mj7aUn8hJuQ8VrQjjEXRsXyJKykgnjR9p4C3nfLtL"
 			]
 		},
-		"elysios/IERC20Metadata.sol": {
-			"keccak256": "0xb63c77a8047f65f823e21c5963e2305ded0691eb80101cdf533c91e84acaafdb",
+		"elysios/Lock.sol": {
+			"keccak256": "0x67a1ae797d30f363cbfb38e3ec7048567848a720f034992da136ceb8093440d0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://283f5cf2881c751e200196e8c8d1d3bf91779e1231aee67191d04783fcb07c91",
-				"dweb:/ipfs/QmTvnjekrmwSzcV565AbMmRCMVQ1hgAE6bzX9iR6XhynVW"
+				"bzz-raw://8f5c2d89668a757993b9d6646bf401e27dcdf4e12383de3ce8bd1fe6a5545bcb",
+				"dweb:/ipfs/QmTXkZJQ1K6kgPohgVCXDvPsXkubKa8yqFaCDHKrqYbRoN"
+			]
+		},
+		"elysios/LockFactory.sol": {
+			"keccak256": "0xbbe9ba688c1f1e71687976d5b795a9db2c6c5bb7279ab6a03eb3e0e76aed2a0e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://38ac096010120f1651dd3c24e86dd4c8c905e28bfa8e9c09b83793dfb207c5c4",
+				"dweb:/ipfs/QmdA4wiJy9fokXGbJD8z5MBa2GrHsvdPdRu4D988TzLaP5"
 			]
 		},
 		"elysios/Ownable.sol": {
@@ -232,12 +205,12 @@
 				"dweb:/ipfs/Qmeb2CejPutKdfNpncsRny8cibhF7aVMJpR6ZvMYruDWLM"
 			]
 		},
-		"elysios/test/TestMint.sol": {
-			"keccak256": "0x6b0e6da7b8c458e3d0128ad59745dabedabe15cfa441d887cd0699653b14e26c",
+		"elysios/SafeERC20.sol": {
+			"keccak256": "0x5a84941e8ac9bf14e8645a519242a62af5da41357582141ca80f55fb04d49ea8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6906cdeb2458ecd21eae2aef29fc051454ee1d50bb0697ec0b977a3715b7bb39",
-				"dweb:/ipfs/QmUAbv2NGpPrQKgusicu32JU7JbiVkb7iisfEgFCbyoPaY"
+				"bzz-raw://858f1e84883304ef309ef6efe8119b68b7fe252e63580b36f365f90bef7772b5",
+				"dweb:/ipfs/QmWx9K9GcsvdjusZgAPR5SwcPSc8robSpPGcApDRsTzeEi"
 			]
 		}
 	},

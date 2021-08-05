@@ -8,19 +8,14 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "initialMintAddress",
-						"type": "address"
+						"internalType": "string",
+						"name": "name_",
+						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "initialSupply",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint8",
-						"name": "dec",
-						"type": "uint8"
+						"internalType": "string",
+						"name": "symbol_",
+						"type": "string"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -49,25 +44,6 @@
 					}
 				],
 				"name": "Approval",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "previousOwner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "OwnershipTransferred",
 				"type": "event"
 			},
 			{
@@ -224,24 +200,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "mint",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "name",
 				"outputs": [
@@ -252,26 +210,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "owner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "renounceOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -352,22 +290,10 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "transferOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
+			"details": "Implementation of the {IERC20} interface. This implementation is agnostic to the way tokens are created. This means that a supply mechanism has to be added in a derived contract using {_mint}. For a generic mechanism see {ERC20PresetMinterPauser}. TIP: For a detailed writeup see our guide https://forum.zeppelin.solutions/t/how-to-implement-erc20-supply-mechanisms/226[How to implement supply mechanisms]. We have followed general OpenZeppelin guidelines: functions revert instead of returning `false` on failure. This behavior is nonetheless conventional and does not conflict with the expectations of ERC20 applications. Additionally, an {Approval} event is emitted on calls to {transferFrom}. This allows applications to reconstruct the allowance for all accounts just by listening to said events. Other implementations of the EIP may not emit these events, as it isn't required by the specification. Finally, the non-standard {decreaseAllowance} and {increaseAllowance} functions have been added to mitigate the well-known issues around setting allowances. See {IERC20-approve}.",
 			"kind": "dev",
 			"methods": {
 				"allowance(address,address)": {
@@ -380,10 +306,10 @@
 					"details": "See {IERC20-balanceOf}."
 				},
 				"constructor": {
-					"details": "Sets the values for {initialMintAddress}, {initialSupply} and {dec}."
+					"details": "Sets the values for {name} and {symbol}. The default value of {decimals} is 18. To select a different value for {decimals} you should overload it. All two of these values are immutable: they can only be set once during construction."
 				},
 				"decimals()": {
-					"details": "returns how many decimals. "
+					"details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless this function is overridden; NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}."
 				},
 				"decreaseAllowance(address,uint256)": {
 					"details": "Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`."
@@ -391,17 +317,8 @@
 				"increaseAllowance(address,uint256)": {
 					"details": "Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address."
 				},
-				"mint(address,uint256)": {
-					"details": "Mints the {amount} of the token to {to}"
-				},
 				"name()": {
 					"details": "Returns the name of the token."
-				},
-				"owner()": {
-					"details": "Returns the address of the current owner."
-				},
-				"renounceOwnership()": {
-					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
 				},
 				"symbol()": {
 					"details": "Returns the symbol of the token, usually a shorter version of the name."
@@ -414,9 +331,6 @@
 				},
 				"transferFrom(address,address,uint256)": {
 					"details": "See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}. Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`."
-				},
-				"transferOwnership(address)": {
-					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				}
 			},
 			"version": 1
@@ -429,7 +343,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"elysios/Elys.sol": "ElysToken"
+			"elysios/ERC20.sol": "ERC20"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -459,14 +373,6 @@
 				"dweb:/ipfs/QmRBX7eaoBNXRnKbnJTGEPkvwazTG1BG54pCb5iTy3LqaK"
 			]
 		},
-		"elysios/Elys.sol": {
-			"keccak256": "0xc12563bdbaeee9340e7e0168c618f3b59bc474ed94f5b43c9db9e7518a9ce441",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://0033ba7fe7dacde37ca7b4188bcb1c4552b6907404ca8450c4ea4a8d4b422204",
-				"dweb:/ipfs/QmQTZjDmA4q7zr23E4CoiFG9WJoJPCbB5fYLhyr2S4r2Ra"
-			]
-		},
 		"elysios/IERC20.sol": {
 			"keccak256": "0x027b891937d20ccf213fdb9c31531574256de774bda99d3a70ecef6e1913ed2a",
 			"license": "MIT",
@@ -481,14 +387,6 @@
 			"urls": [
 				"bzz-raw://283f5cf2881c751e200196e8c8d1d3bf91779e1231aee67191d04783fcb07c91",
 				"dweb:/ipfs/QmTvnjekrmwSzcV565AbMmRCMVQ1hgAE6bzX9iR6XhynVW"
-			]
-		},
-		"elysios/Ownable.sol": {
-			"keccak256": "0x75d1e6250c190ca0500e5a2b7def5e5d6fd3edbe368a6de93dea256471d04593",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://09b8acacbbc0353985940f90022a8e15d15d9767e1eeaa721e1e21655c34c62e",
-				"dweb:/ipfs/Qmeb2CejPutKdfNpncsRny8cibhF7aVMJpR6ZvMYruDWLM"
 			]
 		}
 	},

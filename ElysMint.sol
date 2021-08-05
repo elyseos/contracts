@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-
+import "./Ownable.sol";
 import "./Elys.sol";
 
 contract ElysMint is Ownable {
@@ -11,7 +10,6 @@ contract ElysMint is Ownable {
         Keeping the following amounts at their value without the extra decimals. 
         Decimals get added with _dec function
     */
-    uint256 constant private _initialSupply = 350000000; 
     uint256 constant private _initialEpochSupply = 90000000; //Starts with this and then decreases depending on epoch
     uint256 constant private _epochDecr = 10000000; //amount to decrease the mint amount by every epoch (with the exception of epoch 8)
     
@@ -23,8 +21,8 @@ contract ElysMint is Ownable {
     uint256 private _currentEpochStart = 0;
     uint256 private _numVotes = 0; //num votes in this epoch - also keeps track of number of 4 weeks cycles passed since last vote
 
-    uint8 private _decimals = 4;
-    address private _tokenAddress; //Elys token address that gets created in constructor
+    uint8 private immutable _decimals;
+    ElysToken private immutable _token; //Elys token address that gets created in constructor
     
     
     /**
@@ -33,9 +31,9 @@ contract ElysMint is Ownable {
      */
     constructor(address token){
         _currentEpochStart = block.timestamp;
-        _tokenAddress = token;
-        ElysToken _token = ElysToken(_tokenAddress);
-        _decimals = _token.decimals();
+        ElysToken elys = ElysToken(token);
+        _token = elys;
+        _decimals = elys.decimals();
     }
     
      /**
@@ -64,7 +62,6 @@ contract ElysMint is Ownable {
         /*
             After voting cycle (9 epochs) minting abount is 3% of total supply
         */
-        ElysToken _token = ElysToken(_tokenAddress);
         uint256 totalSupply = _token.totalSupply();
         
         return  (3 * totalSupply/100)/_dec();
@@ -109,7 +106,6 @@ contract ElysMint is Ownable {
         uint256 mintAmount = _mintAmount()*_dec();
         _currentEpoch ++;
         _currentEpochStart = block.timestamp;
-        ElysToken _token = ElysToken(_tokenAddress);
         _token.mint(to, mintAmount);
     }
     
