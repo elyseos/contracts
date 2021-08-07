@@ -17,6 +17,8 @@ Address: [0xF4125d8df93B09826517F551d9872Ac28c990E96](https://ftmscan.com/addres
 
 Flower token for seed sale.
 
+Address: [0x1c66fe3476f18d07b0460d76e45b15a35611eb4b](https://ftmscan.com/token/0x1c66fe3476f18d07b0460d76e45b15a35611eb4b)
+
 ### Lock.sol
 
 Lock token for vesting.
