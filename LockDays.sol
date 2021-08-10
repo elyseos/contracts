@@ -13,8 +13,7 @@ contract LockToken{
      uint256 private immutable _numDays;
     //records the start of the contract 
     uint256 private immutable _start;
-    
-
+ 
     // beneficiary of tokens after they are released
     address private immutable _beneficiary;
     
@@ -23,8 +22,6 @@ contract LockToken{
         _beneficiary = beneficiary_;
         _start = block.timestamp;
         _numDays = numDays_;
-        
-        
     }
     
     /**
@@ -55,6 +52,9 @@ contract LockToken{
         return token().balanceOf(address(this));
     }
     
+    /**
+     * @return number of days left until the token can be released
+     */
     function daysUntilRelease() public view returns (uint256){
         uint256 end = _start+_numDays*(1 days);
         if(_blocktime()>=end) return 0;
@@ -62,6 +62,9 @@ contract LockToken{
         return daysLeft;
     }
     
+     /**
+     * Releases the locked tokens to the benificiary
+     */
     function release() public {
         require(locked()>0 && daysUntilRelease()==0);
         token().safeTransfer(beneficiary(),locked());

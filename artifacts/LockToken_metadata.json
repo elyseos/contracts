@@ -19,25 +19,12 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "numReleaseDays_",
+						"name": "numDays_",
 						"type": "uint256"
 					}
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
-			},
-			{
-				"inputs": [],
-				"name": "amountCanRelease",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
 			},
 			{
 				"inputs": [],
@@ -47,6 +34,19 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "daysUntilRelease",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -74,19 +74,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "released",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "token",
 				"outputs": [
 					{
@@ -102,24 +89,19 @@
 		"devdoc": {
 			"kind": "dev",
 			"methods": {
-				"amountCanRelease()": {
-					"returns": {
-						"_0": "the amount that can be released to the beneficiary at this time"
-					}
-				},
 				"beneficiary()": {
 					"returns": {
 						"_0": "the beneficiary of the tokens."
 					}
 				},
+				"daysUntilRelease()": {
+					"returns": {
+						"_0": "number of days left until the token can be released"
+					}
+				},
 				"locked()": {
 					"returns": {
 						"_0": "number of tokens still locked up"
-					}
-				},
-				"released()": {
-					"returns": {
-						"_0": "the tokens that have been released already"
 					}
 				},
 				"token()": {
@@ -132,13 +114,17 @@
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {},
+			"methods": {
+				"release()": {
+					"notice": "Releases the locked tokens to the benificiary"
+				}
+			},
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"elysios/Lock.sol": "LockToken"
+			"elysios/LockDays.sol": "LockToken"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -168,12 +154,12 @@
 				"dweb:/ipfs/Qmbn5Mj7aUn8hJuQ8VrQjjEXRsXyJKykgnjR9p4C3nfLtL"
 			]
 		},
-		"elysios/Lock.sol": {
-			"keccak256": "0x67a1ae797d30f363cbfb38e3ec7048567848a720f034992da136ceb8093440d0",
+		"elysios/LockDays.sol": {
+			"keccak256": "0x99567aa110e0b65b05156bdfb840b4f07b93f29f64d6f66ebd2b107df3b66a03",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8f5c2d89668a757993b9d6646bf401e27dcdf4e12383de3ce8bd1fe6a5545bcb",
-				"dweb:/ipfs/QmTXkZJQ1K6kgPohgVCXDvPsXkubKa8yqFaCDHKrqYbRoN"
+				"bzz-raw://3b5ff834100b4047cb83603c7abb0d8385e6e917c5ab235eedc93b7a65e38d2b",
+				"dweb:/ipfs/QmT4qKwKKW2TRH1v6RunZB5vPsNj9mi7LncQ3aEukkcdpa"
 			]
 		},
 		"elysios/SafeERC20.sol": {
