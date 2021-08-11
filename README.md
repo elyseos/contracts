@@ -32,3 +32,9 @@ Seed Sale Address: [0x4014525e13600dA6Ab2eb89ABEd2E12CdabEC6d0](https://ftmscan.
 Foundation Address: [0x41608F62D01a6faDf210677a9a2029ff05195c1f](https://ftmscan.com/address/0x41608F62D01a6faDf210677a9a2029ff05195c1f) - releases 1% per day over 100 days
 
 Team Address: [0x19DeC8d99a786f5F876a6bD17c91E3CF0c0f0306](https://ftmscan.com/address/0x19DeC8d99a786f5F876a6bD17c91E3CF0c0f0306) - releases 1% per day over 100 days
+
+### LockDays.sol
+
+Modified Lock.sol to only pay out after n days (365 days on deploy)
+
+Address: [0x549615Fc6008E498C159eaD99143541e033D2813](https://ftmscan.com/address/0x549615Fc6008E498C159eaD99143541e033D2813)
