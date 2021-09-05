@@ -16,9 +16,9 @@ contract LockedElysFactory{
     IERC20 private _token;
     
     LockedELYS private immutable _lockedElys;
-    address private immutable _drawWallet;
+    address payable private immutable _drawWallet;
     
-    constructor(IERC20 token_, address ELYSPrice, address drawWallet){
+    constructor(IERC20 token_, address ELYSPrice, address payable drawWallet){
         _lockedElys = new LockedELYS(token_);
         _elysPrice = IElysPrice(ELYSPrice);
         _drawWallet = drawWallet;
@@ -51,8 +51,15 @@ contract LockedElysFactory{
         _token.safeTransfer(address(_lockedElys),amount + reward);
     }
     
+    function lock(uint256 amount, uint256 lockDays, uint256 tokenId) public {
+        uint256 reward = getReward(lockDays, amount);
+        require(_token.allowance(msg.sender, address(this))==amount + reward);
+        _lockedElys.mint(msg.sender, tokenId, lockDays, amount + reward);
+        _token.safeTransferFrom(msg.sender,address(_lockedElys),amount+reward);
+    }
+    
     function draw() public{
-        //address(this).balance
+        _drawWallet.transfer(address(this).balance);
     }
    
 }
