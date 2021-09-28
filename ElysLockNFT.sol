@@ -32,7 +32,7 @@ contract LockedELYS is ERC721Enumerable, Ownable {
     
     function mint(address to, uint256 tokenId, uint256 lockDays, uint256 amount, uint256 reward) public onlyOwner{
         _safeMint(to, tokenId);
-        require(lockDays>0 && amount>0);
+        require(lockDays>0 && amount>0,"Invalid amounts");
         _lockedAmount[tokenId] = amount;
         _reward[tokenId] = reward;
         _lockStart[tokenId] = _blockTime();
@@ -58,7 +58,8 @@ contract LockedELYS is ERC721Enumerable, Ownable {
     }
     
     function release(uint256 tokenId) public {
-        require(daysLeft(tokenId)==0 && _lockedAmount[tokenId]>0);
+        require(_lockedAmount[tokenId]>0,"nothing locked");
+        require(daysLeft(tokenId)==0,"daysLeft>0");
         uint256 bal = _lockedAmount[tokenId];
         _lockedAmount[tokenId] = 0;
         uint256 rwrd = _reward[tokenId];
@@ -68,8 +69,9 @@ contract LockedELYS is ERC721Enumerable, Ownable {
     }
     
     function emergencyRelease(uint256 tokenId) public {
-        require(ownerOf(tokenId)==msg.sender);
-        require(_lockedAmount[tokenId]>0);
+        require(ownerOf(tokenId)==msg.sender,"Not owner of lock");
+        require(_lockedAmount[tokenId]>0,"lock amount is 0");
+        if(daysLeft(tokenId)==0)return release(tokenId);
         uint256 bal = _lockedAmount[tokenId];
         _lockedAmount[tokenId] = 0;
         uint256 rwrd = _reward[tokenId];
