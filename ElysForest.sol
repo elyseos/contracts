@@ -60,7 +60,7 @@ contract ForestFactory is Ownable{
         uint256 reward = getReward(lockDays, amount);
         uint256 donationAmount;
         if(donation>0){
-            donationAmount = donation/reward * 100;
+            donationAmount = donation * reward/100;
             reward -= donationAmount;
         }
         require(_token.allowance(msg.sender, address(this))>=amount);
