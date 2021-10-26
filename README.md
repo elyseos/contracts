@@ -44,3 +44,4 @@ Address: [0x549615Fc6008E498C159eaD99143541e033D2813](https://ftmscan.com/addres
 Factory for Elys lock NFTs
 
 Address: 0x4000723Ce9354e9085783A6Cd533BD528327D23E
+
