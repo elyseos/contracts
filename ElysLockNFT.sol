@@ -17,13 +17,10 @@ contract LockedELYS is ERC721Enumerable, Ownable {
     mapping(uint256 => uint256) private _lockDays; //maps tokenID to num days locked
     mapping(uint256 => uint256) private _lockStart; //maps tokenID to start of lock
     
-    uint256 private _timestamp;
-    
     constructor(IERC20 token) ERC721("Locked Elys", "LELYS"){
        _baseUri = "";
        _token = token;
        _factory = msg.sender;
-       _timestamp = block.timestamp;
     }
     
     function _baseURI()  internal override view returns (string memory) {
@@ -53,8 +50,8 @@ contract LockedELYS is ERC721Enumerable, Ownable {
        return (lockEnd-_blockTime())/(1 days);
     }
     
-    function lockInfo(uint256 tokenId) public view returns (uint256, uint256, uint256){
-        return (lockedAmount(tokenId), getReward(tokenId), daysLeft(tokenId));
+    function lockInfo(uint256 tokenId) public view returns (uint256, uint256, uint256, uint256){
+        return (lockedAmount(tokenId), getReward(tokenId), daysLeft(tokenId), _lockStart[tokenId]);
     }
     
     function release(uint256 tokenId) public {
@@ -81,14 +78,25 @@ contract LockedELYS is ERC721Enumerable, Ownable {
         _burn(tokenId);
     }
     
-    function _blockTime() private view returns (uint256){
-        //return block.timestamp;
-        return _timestamp;
+    function getStats() public view returns (uint256,uint256,uint256){ //totalLocked, totalRewards, totalTimeLocked
+        uint256 ln = totalSupply();
+        uint256 totalLocked;
+        uint256 totalRewards;
+        uint256 totalTimeLocked;
+        
+        for(uint256 i=0; i<ln; i++){
+            uint256 tokenId = tokenByIndex(i);
+            totalLocked += _lockedAmount[tokenId];
+            totalRewards += _reward[tokenId];
+            totalTimeLocked += _lockDays[tokenId];
+        }
+        return (totalLocked,totalRewards,totalTimeLocked);
     }
     
-    function _inc(uint256 numDays) public {
-        _timestamp += numDays * (1 days);
+    function _blockTime() private view returns (uint256){
+        return block.timestamp;
     }
+    
     
 }
 

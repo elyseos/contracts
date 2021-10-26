@@ -63,7 +63,7 @@ contract ForestFactory is Ownable{
             donationAmount = donation * reward/100;
             reward -= donationAmount;
         }
-        require(_token.allowance(msg.sender, address(this))>=amount);
+        require(_token.allowance(msg.sender, address(this))>=amount,"Insufficient allowance");
         _token.safeTransferFrom(msg.sender,address(_lockedElys),amount);
         if(reward>0)_token.safeTransfer(address(_lockedElys),reward);
         if(donationAmount>0)_token.safeTransfer(_donationAddress,donationAmount);
