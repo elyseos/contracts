@@ -39,8 +39,9 @@ Modified Lock.sol to only pay out after n days (365 days on deploy)
 
 Address: [0x549615Fc6008E498C159eaD99143541e033D2813](https://ftmscan.com/address/0x549615Fc6008E498C159eaD99143541e033D2813)
 
-### ElysPrice.sol
+### ForestFactory.sol
 
-Fecthes current Elys price from Zoodex
+Factory for Elys lock NFTs
 
-Address: [0x9Ab0A1Ff52B6F0C6f6aB43f2aE26Aa0B9BA2b861](https://ftmscan.com/address/0x9Ab0A1Ff52B6F0C6f6aB43f2aE26Aa0B9BA2b861)
+Address: 0x4000723Ce9354e9085783A6Cd533BD528327D23E
+
