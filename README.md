@@ -45,3 +45,9 @@ Factory for Elys lock NFTs
 
 Address: 0x4000723Ce9354e9085783A6Cd533BD528327D23E
 
+### ElysPrice.sol
+
+Contract to returnthe price of 1 ELYS in FTM (from Zoodex)
+
+Address: 0xE57a3625bbe3635A20d5B04CE3Bf65C2e6BBC179
+
